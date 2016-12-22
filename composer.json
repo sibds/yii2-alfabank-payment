@@ -1,0 +1,22 @@
+{
+    "name": "sibds/yii2-alfabank-payment",
+    "description": "Payment widget for alfabank ",
+    "type": "yii2-extension",
+    "keywords": ["yii2"," payment"," alfabank"," sibds"," mazurva"],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Vadim Mazur",
+            "email": "mazurva@gmail.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "~2.0.0",
+        "omgdef/yii2-alphabank-payment": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "sibds\\payment\\alfabank\\": ""
+        }
+    }
+}
