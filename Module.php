@@ -28,7 +28,7 @@ class Module extends \yii\base\Module
     public function gateway($method, $data) {
         $curl = curl_init(); // Инициализируем запрос
         curl_setopt_array($curl, array(
-            CURLOPT_URL => $this->GATEWAY_URL.$method, // Полный адрес метода
+            CURLOPT_URL => self::GATEWAY_URL.$method, // Полный адрес метода
             CURLOPT_RETURNTRANSFER => true, // Возвращать ответ
             CURLOPT_POST => true, // Метод POST
             CURLOPT_POSTFIELDS => http_build_query($data) // Данные в запросе
