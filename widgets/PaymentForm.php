@@ -2,6 +2,7 @@
 namespace sibds\payment\alfabank\widgets;
 
 use sibds\payment\alfabank\Module;
+use yii\helpers\Url;
 use yii;
 
 class PaymentForm extends \yii\base\Widget
