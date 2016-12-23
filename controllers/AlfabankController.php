@@ -5,7 +5,7 @@ use yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
-class PaymasterController extends Controller
+class AlfabankController extends Controller
 {
     public function beforeAction($action)
     {
