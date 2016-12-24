@@ -12,7 +12,9 @@ use yii;
 
 class Module extends \yii\base\Module
 {
-    const GATEWAY_URL = 'https://3dsec.sberbank.ru/payment/rest/';
+    //const GATEWAY_URL = 'https://3dsec.sberbank.ru/payment/rest/';
+    const GATEWAY_URL = 'https://test.paymentgate.ru/testpayment/rest/';
+
     public $adminRoles = ['admin', 'superadmin'];
     public $thanksUrl = '/main/spasibo-za-zakaz';
     public $failUrl = '/main/problema-s-oplatoy';
