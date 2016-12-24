@@ -75,6 +75,7 @@ class PaymentForm extends \yii\base\Widget
 //	$response = $module->gateway('registerPreAuth.do', $data);
 
         if (isset($response['errorCode'])) { // В случае ошибки вывести ее
+            var_dump($data);
             echo 'Ошибка #' . $response['errorCode'] . ': ' . $response['errorMessage'];
         } else { // В случае успеха перенаправить пользователя на плетжную форму
             header('Location: ' . $response['formUrl']);
