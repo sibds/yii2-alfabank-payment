@@ -12,9 +12,7 @@ use yii;
 
 class Module extends \yii\base\Module
 {
-    //const GATEWAY_URL = 'https://3dsec.sberbank.ru/payment/rest/';
-    const GATEWAY_URL = 'https://test.paymentgate.ru/testpayment/rest/';
-
+    public $gatewayUrl = 'https://test.paymentgate.ru/testpayment/rest/';
     public $adminRoles = ['admin', 'superadmin'];
     public $thanksUrl = '/main/spasibo-za-zakaz';
     public $failUrl = '/main/problema-s-oplatoy';
@@ -30,7 +28,7 @@ class Module extends \yii\base\Module
     public function gateway($method, $data) {
         $curl = curl_init(); // Инициализируем запрос
         curl_setopt_array($curl, array(
-            CURLOPT_URL => self::GATEWAY_URL.$method, // Полный адрес метода
+            CURLOPT_URL => $this->gatewayUrl.$method, // Полный адрес метода
             CURLOPT_RETURNTRANSFER => true, // Возвращать ответ
             CURLOPT_POST => true, // Метод POST
             CURLOPT_POSTFIELDS => http_build_query($data) // Данные в запросе
