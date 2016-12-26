@@ -78,6 +78,7 @@ class PaymentForm extends \yii\base\Widget
             var_dump($data);
             echo 'Ошибка #' . $response['errorCode'] . ': ' . $response['errorMessage'];
         } else { // В случае успеха перенаправить пользователя на плетжную форму
+
             header('Location: ' . $response['formUrl']);
             die();
         }
