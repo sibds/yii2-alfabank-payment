@@ -81,7 +81,5 @@ class PaymentForm extends \yii\base\Widget
             header('Location: ' . $response['formUrl']);
             die();
         }
-
-        die();
     }
 }
