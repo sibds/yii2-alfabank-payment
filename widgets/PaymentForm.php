@@ -32,7 +32,8 @@ class PaymentForm extends \yii\base\Widget
             'password' => $module->password,
             'orderNumber' => urlencode($this->orderModel->getId()),
             'amount' => urlencode($this->orderModel->getCost() * 100), // передача данных в копейках/центах
-            'returnUrl' => Url::toRoute(['/alfabank/alfabank/result', 'order' => urlencode($this->orderModel->getId())], true)
+            'returnUrl' => Url::toRoute(['/alfabank/alfabank/result', 'order' => urlencode($this->orderModel->getId())], true),
+            //'failUrl' => Url::toRoute([$module->failUrl], true),
         );
 
         /**
@@ -75,9 +76,12 @@ class PaymentForm extends \yii\base\Widget
 //	$response = $module->gateway('registerPreAuth.do', $data);
 
         if (isset($response['errorCode'])) { // В случае ошибки вывести ее
-            var_dump($data);
-            echo 'Ошибка #' . $response['errorCode'] . ': ' . $response['errorMessage'];
+            header('Location: ' . Url::toRoute([$module->failUrl], true));
+            //echo 'Ошибка #' . $response['errorCode'] . ': ' . $response['errorMessage'];
+            die();
         } else { // В случае успеха перенаправить пользователя на плетжную форму
+            $this->orderModel->order_info = $response['orderId'];
+            $this->orderModel->save();
 
             header('Location: ' . $response['formUrl']);
             die();

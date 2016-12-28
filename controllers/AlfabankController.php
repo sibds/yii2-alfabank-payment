@@ -13,19 +13,34 @@ class AlfabankController extends Controller
         return parent::beforeAction($action);
     }
 
-    function actionResult($order)
+    function actionResult($order, $orderId)
     {
-        $pmOrderId = (int)$order;
-        $orderModel = yii::$app->orderModel;
-        $orderModel = $orderModel::findOne($pmOrderId);
-        if (!$orderModel) {
-            throw new NotFoundHttpException('The requested order does not exist.');
+        $module = Yii::$app->getModule('alfabank');
+
+        $data = array(
+            'userName' => $module->username,
+            'password' => $module->password,
+            'orderId' => $orderId,
+        );
+
+        $response = $module->gateway('getOrderStatus.do', $data);
+
+        if(isset($response['OrderStatus'])&&$response['OrderStatus']==2){
+            $pmOrderId = (int)$response['OrderNumber'];
+            $orderModel = yii::$app->orderModel;
+            $orderModel = $orderModel::findOne($pmOrderId);
+            if (!$orderModel) {
+                throw new NotFoundHttpException('The requested order does not exist.');
+            }
+
+
+            $orderModel->setPaymentStatus('yes');
+            $orderModel->save(false);
+
+
+            return $this->redirect($module->thanksUrl);
         }
 
-
-        $orderModel->setPaymentStatus('yes');
-        $orderModel->save(false);
-
-        return 'YES';
+        return $this->redirect($module->failUrl);
     }
 }
