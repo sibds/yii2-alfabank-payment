@@ -12,7 +12,9 @@ use yii;
 
 class Module extends \yii\base\Module
 {
-    public $gatewayUrl = 'https://test.paymentgate.ru/testpayment/rest/';
+    public $gatewayUrl = 'https://pay.alfabank.ru/payment/rest/';
+    public $gatewayTestUrl'https://test.paymentgate.ru/testpayment/rest/';
+    public $testServer = false;
     public $adminRoles = ['admin', 'superadmin'];
     public $thanksUrl = '/main/spasibo-za-zakaz';
     public $failUrl = '/main/problema-s-oplatoy';
@@ -28,7 +30,7 @@ class Module extends \yii\base\Module
     public function gateway($method, $data) {
         $curl = curl_init(); // Инициализируем запрос
         curl_setopt_array($curl, array(
-            CURLOPT_URL => $this->gatewayUrl.$method, // Полный адрес метода
+            CURLOPT_URL => ($this->testServer?$this->gatewayTestUrl:$this->gatewayUrl).$method, // Полный адрес метода
             CURLOPT_RETURNTRANSFER => true, // Возвращать ответ
             CURLOPT_POST => true, // Метод POST
             CURLOPT_POSTFIELDS => http_build_query($data) // Данные в запросе
