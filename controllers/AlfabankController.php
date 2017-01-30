@@ -19,7 +19,7 @@ class AlfabankController extends Controller
 
         $data = array(
             'userName' => $module->username,
-            'password' => urlencode($module->password),
+            'password' => $module->password,
             'orderId' => $orderId,
         );
 
