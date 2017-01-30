@@ -29,7 +29,7 @@ class PaymentForm extends \yii\base\Widget
 
         $data = array(
             'userName' => $module->username,
-            'password' => $module->password,
+            'password' => urlencode($module->password),
             'orderNumber' => urlencode($this->orderModel->getId()),
             'amount' => urlencode($this->orderModel->getCost() * 100), // передача данных в копейках/центах
             'returnUrl' => Url::toRoute(['/alfabank/alfabank/result', 'order' => urlencode($this->orderModel->getId())], true),
