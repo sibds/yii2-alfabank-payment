@@ -13,7 +13,7 @@ use yii;
 class Module extends \yii\base\Module
 {
     public $gatewayUrl = 'https://pay.alfabank.ru/payment/rest/';
-    public $gatewayTestUrl'https://test.paymentgate.ru/testpayment/rest/';
+    public $gatewayTestUrl = 'https://test.paymentgate.ru/testpayment/rest/';
     public $testServer = false;
     public $adminRoles = ['admin', 'superadmin'];
     public $thanksUrl = '/main/spasibo-za-zakaz';
