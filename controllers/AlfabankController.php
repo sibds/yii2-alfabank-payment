@@ -4,6 +4,7 @@ namespace sibds\payment\alfabank\controllers;
 use yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\base\Event;
 
 class AlfabankController extends Controller
 {
@@ -36,7 +37,10 @@ class AlfabankController extends Controller
 
             $orderModel->setPaymentStatus('yes');
             $orderModel->save(false);
-
+            
+            $event = new Event();
+            $event->sender = $orderModel;
+            Yii::$app->trigger('successPayment', $event);
 
             return $this->redirect($module->thanksUrl);
         }
